@@ -60,6 +60,7 @@ final public class PerspectiveScrollBehaviour: NSObject, PerspectiveBehaviour {
    This property specifies how the safe area insets are used to modify
    the content area of the scroll view. The default value of this property is `UIScrollView.ContentInsetAdjustmentBehavior.never`.
    */
+  @available(iOS 11.0, *)
   public var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
     get { return scrollView.contentInsetAdjustmentBehavior }
     set { scrollView.contentInsetAdjustmentBehavior = newValue }
@@ -70,7 +71,9 @@ final public class PerspectiveScrollBehaviour: NSObject, PerspectiveBehaviour {
 
     self.delegate = delegate
     self.scrollView.translatesAutoresizingMaskIntoConstraints = false
-    self.scrollView.contentInsetAdjustmentBehavior = .never
+    if #available(iOS 11.0, *) {
+        self.scrollView.contentInsetAdjustmentBehavior = .never
+    }
 
     self.scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     self.scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
